@@ -4,27 +4,21 @@
   :root {
   /* Light theme values */
   --color-background-light: #F9FAFB;
-  --color-surface-light: #FFFFFF;
   --color-text1-light: #111827;
   --color-text2-light: #6B7280;
   --color-primary-light: #4F46E5;
   --color-hover-light: #4338CA;
   --color-secondary-light: #E0E7FF; 
   --color-accent-light: #F59E0B;
-  --color-border-light: #E5E7EB;
-  --color-error-light: #EF4444;
 
   /* Dark theme values */
   --color-background-dark: #0F172A;
-  --color-surface-dark: #020617;
   --color-text1-dark: #E5E7EB;
   --color-text2-dark: #9CA3AF;
   --color-primary-dark: #6366F1;
   --color-hover-dark: #818CF8;
   --color-secondary-dark: #1E1B4B; 
   --color-accent-dark: #FBBF24;
-  --color-border-dark: #1E293B;
-  --color-error-dark: #F87171;
 }
   .theme-light {
     --color-background: var(--color-background-light);
