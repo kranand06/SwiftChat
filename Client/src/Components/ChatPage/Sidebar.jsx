@@ -2,6 +2,7 @@ import React from "react";
 import { Menu, User, LogOut, Search } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import {userDummyData} from "../assets";
 
 const Sidebar = () => {
     const [open, setOpen] = useState(false);
@@ -62,6 +63,19 @@ const Sidebar = () => {
                 <Search className="w-5 h-5 text-theme-2" />
                 <input className="w-full bg-transparent outline-none text-theme-1 placeholder:text-theme-2" placeholder="Search…" />
             </div>
+
+            <div>
+                {userDummyData.map((user) => (
+                    <div key={user._id} className="flex items-center gap-3 p-3 rounded-lg hover:bg-surface/50 cursor-pointer transition mb-2">
+                        <img src={(user.profilePic )? user.profilePic : "/avatar_icon"} alt={user.fullName} className="w-10 h-10 rounded-full object-cover" />
+                        <div>
+                            <h2 className="text-theme-1 font-medium">{user.fullName}</h2>
+                            <p className="text-theme-2 text-sm truncate w-32">{user.email}</p>
+                        </div>
+                    </div>
+                ))}
+            </div>
+
         </div>
     );
 };
