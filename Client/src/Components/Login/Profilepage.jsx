@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Camera, Mail, User, Save } from "lucide-react";
+import { Camera, Mail, User, Save, LogOut } from "lucide-react";
 
 const ProfilePage = () => {
   const [profile, setProfile] = useState({
@@ -118,6 +118,15 @@ const ProfilePage = () => {
           >
             <Save className="w-5 h-5" />
             Save Changes
+          </button>
+
+          {/* logout button  */}
+          <button
+            // onClick={handleSave}
+            className="w-full mt-6 flex items-center justify-center gap-2 bg-primary hover:bg-hover text-white font-semibold py-3 rounded-xl transition"
+          >
+            <LogOut className="w-5 h-5" />
+            LogOut
           </button>
         </div>
       </div>

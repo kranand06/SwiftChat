@@ -11,7 +11,8 @@ const ForgotPassword = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-
+    console.log("Password reset requested for:", email);
+    // Simulate an API call
     setTimeout(() => {
       setLoading(false);
       setSent(true);

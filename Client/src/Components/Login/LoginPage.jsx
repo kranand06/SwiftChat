@@ -12,7 +12,8 @@ const LoginPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-
+    console.log("Login submitted:", { email, password });
+    // Simulate an API call
     setTimeout(() => {
       setLoading(false);
       setEmail("");

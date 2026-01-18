@@ -20,7 +20,8 @@ const Signup = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-
+    console.log("Form submitted:", form);
+    // Simulate an API call
     setTimeout(() => {
       setLoading(false);
       setForm({ name: "", email: "", password: "" });
