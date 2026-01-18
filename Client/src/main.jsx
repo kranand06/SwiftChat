@@ -9,6 +9,7 @@ import LoginPage from './Components/Login/LoginPage.jsx'
 import ForgotPassword from './Components/Login/ForgotPassword.jsx'
 import ChatPage from './Components/ChatPage/ChatPage.jsx'
 import Signup from './Components/Login/Signup.jsx'
+import Profilepage from './Components/Login/Profilepage.jsx'
 
 
 const route = createBrowserRouter([
@@ -35,6 +36,10 @@ const route = createBrowserRouter([
       {
         path: 'forgot-password',
         element: < ForgotPassword/>,
+      },
+      {
+        path: 'profile',
+        element: < Profilepage/>,
       },
       {
         path: '*',

@@ -4,8 +4,9 @@ import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {userDummyData} from "../assets";
 
-const Sidebar = () => {
+const Sidebar = ({selectedUser, setSelectedUser}) => {
     const [open, setOpen] = useState(false);
+    // const [selectedUser, setselectedUser] = useState(null);
     const menuRef = useRef(null);
     const navigate = useNavigate();
 
@@ -21,7 +22,7 @@ const Sidebar = () => {
     }, []);
 
     return (
-        <div className="p-5 border-r-2 border-gray-500">
+        <div className="p-5 border-r-2 border-gray-500 h-full overflow-scroll">
             <div className="flex flex-row justify-between gap-4">
                 <div className="flex flex-row items-center gap-4">
                     <img className="w-8" src="favicon.svg" alt="logo" />
@@ -66,7 +67,10 @@ const Sidebar = () => {
 
             <div>
                 {userDummyData.map((user) => (
-                    <div key={user._id} className="flex items-center gap-3 p-3 rounded-lg hover:bg-surface/50 cursor-pointer transition mb-2">
+                    <div 
+                    key={user._id} 
+                    onClick={()=>setSelectedUser(user)}
+                    className={`flex items-center gap-3 p-3 rounded-lg hover:bg-surface/50 cursor-pointer transition mb-2 ${(selectedUser?._id==user._id )? 'bg-custom-grey' : ''}`}>
                         <img src={(user.profilePic )? user.profilePic : "/avatar_icon"} alt={user.fullName} className="w-10 h-10 rounded-full object-cover" />
                         <div>
                             <h2 className="text-theme-1 font-medium">{user.fullName}</h2>

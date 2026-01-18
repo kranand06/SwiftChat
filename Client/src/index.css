@@ -6,10 +6,11 @@
   --color-background-light: #F9FAFB;
   --color-text1-light: #111827;
   --color-text2-light: #6B7280;
-  --color-primary-light: #4F46E5;
+  --color-primary-light: #4c9cae;
   --color-hover-light: #4338CA;
   --color-secondary-light: #E0E7FF; 
-  --color-accent-light: #F59E0B;
+  --color-accent-light: #4338CA;
+  --color-grey-light: #cad5e2;
 
   /* Dark theme values */
   --color-background-dark: #0F172A;
@@ -18,7 +19,8 @@
   --color-primary-dark: #6366F1;
   --color-hover-dark: #818CF8;
   --color-secondary-dark: #1E1B4B; 
-  --color-accent-dark: #FBBF24;
+  --color-accent-dark: #818CF8;
+  --color-grey-dark: #364153;
 }
   .theme-light {
     --color-background: var(--color-background-light);
@@ -28,6 +30,7 @@
     --color-hover: var(--color-hover-light);
     --color-secondary: var(--color-secondary-light);
     --color-accent: var(--color-accent-light);
+    --color-grey: var(--color-grey-light);
   }
 
   .theme-dark {
@@ -38,6 +41,7 @@
     --color-hover: var(--color-hover-dark);
     --color-secondary: var(--color-secondary-dark);
     --color-accent: var(--color-accent-dark);
+    --color-grey: var(--color-grey-dark);
   }
 }
 
@@ -51,5 +55,6 @@
   .hover\:bg-hover:hover { background-color: var(--color-hover); }
   .bg-secondary { background-color: var(--color-secondary); }
   .bg-accent { background-color: var(--color-accent); }
+  .bg-custom-grey { background-color: var(--color-grey); }
   .text-accent { color: var(--color-accent); }
 }
