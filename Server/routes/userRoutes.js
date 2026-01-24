@@ -1,20 +1,20 @@
 import express from 'express';
-import { registerUser, loginUser, getUserProfile, checkAuth } from '../controllers/userController.js';
 import protect from '../Middleware/auth.js';
+import { checkAuth, login, signup, updateProfile } from '../controllers/userController.js';
 
 
 const userRouter = express.Router();
 
 // Route for user registration
-router.post('/signup', registerUser);
+userRouter.post('/signup', signup);
 
 // Route for user login
-router.post('/login', loginUser);
+userRouter.post('/login', login);
 
-// Route for getting user profile (protected)
-router.get('/profile', protect, getUserProfile);
+// Route for updating user profile (protected)
+userRouter.put('/profile', protect, updateProfile);
 
 //check auth route
-router.get('/profile', protect, checkAuth);
+userRouter.get('/check', protect, checkAuth);
 
 export default userRouter;
