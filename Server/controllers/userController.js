@@ -20,9 +20,9 @@ export const signup = async (req, res) => {
 
     const newUser = new User({ name, email, password: hashedPassword });
 
+    await newUser.save();
+    
     const token = generateToken(newUser._id);
-
-    // await newUser.save();
 
     res.status(201).json({
       success: true,

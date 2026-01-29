@@ -1,5 +1,7 @@
-import User from "../models/User.js";
-import Message from "../models/Message.js";
+import User from "../lib/schema.js";
+import Message from "../lib/messageSchema.js";
+
+
 
 export const getSidebarUsers = async (req, res) => {
   try {
@@ -71,7 +73,37 @@ export const markMessageSeen=async (req,res)=>{
         const {id}= req.params;
         await Message.findByIdAndUpdate(id,{seen:true});
         res.status(200).json({message:"Message marked as seen"});
+
+    } catch (error) {
+        console.error("mark Message as seen",error);
+        res.status(500).json({message:"Server error"});
+    }
+}
+
+
+//SEnd messaage to a selected user
+export const sendMessage = async (req,res) =>{
+    try {
+        const {text,image}=req.body;
+        const receiverId = req.params.id;
+        const senderId = req.user.id;
+        let imageUrl;
+        if(image){
+            const uploadResponse = await cloudinary.uploader.upload(image);
+            imageUrl=uploadResponse.secure_url;
+        }
         
+        const newMessage = await Message.create({
+            senderId,
+            receiverId,
+            text,
+            image:imageUrl
+        
+          });
+
+          res.status(201).json(newMessage);
+
+
     } catch (error) {
         console.error("mark Message as seen",error);
         res.status(500).json({message:"Server error"});
