@@ -51,6 +51,7 @@ io.on('connection', (socket) => {
 
 
 //Creating middlewares
+
 app.use(express.json({ limit: '5mb' }))
 app.use(cors())
 

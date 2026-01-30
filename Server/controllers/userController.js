@@ -1,3 +1,9 @@
+import User from "../lib/schema.js";
+import bcrypt from "bcrypt";
+import { generateToken } from "../lib/utils.js";
+// import jwt from "jsonwebtoken";
+// import cloudinary from "../lib/cloudinary.js";
+
 //Signup new user controller
 export const signup = async (req, res) => {
   try {
