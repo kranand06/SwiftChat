@@ -1,5 +1,6 @@
 import User from "../lib/schema.js";
 import Message from "../lib/messageSchema.js";
+import {io, userSocketMap} from "../index.js";
 
 
 
@@ -100,6 +101,11 @@ export const sendMessage = async (req,res) =>{
             image:imageUrl
         
           });
+
+          const receiverSocketId = userSocketMap.get(receiverId);
+          if (receiverSocketId) {
+              io.to(receiverSocketId).emit("newMessage", newMessage);
+          }
 
           res.status(201).json(newMessage);
 
