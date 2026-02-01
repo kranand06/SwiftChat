@@ -3,6 +3,7 @@ import { Outlet } from "react-router-dom"
 // import Footer from "./Components/Footer"
 import { createContext, useEffect, useState } from 'react'
 import ThemeToggle from "./Components/ThemeToggle";
+import { Toaster } from 'react-hot-toast';
 
 
 export const UserContext = createContext();
@@ -11,9 +12,9 @@ function App() {
 
   const [open, setOpen] = useState(false);
 
-    const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
+  const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
 
-    useEffect(() => {
+  useEffect(() => {
     document.documentElement.classList.remove("theme-light", "theme-dark");
     document.documentElement.classList.add(`theme-${theme}`);
     localStorage.setItem("theme", theme);
@@ -21,11 +22,12 @@ function App() {
 
   return (
     <>
-    <UserContext.Provider value={{ open, setOpen }}>
-      {/* <Navbar /> */}
-      <Outlet />
-      {/* <Footer /> */}
-      </UserContext.Provider>
+        <UserContext.Provider value={{ open, setOpen }}>
+          <Toaster/>
+          {/* <Navbar /> */}
+          <Outlet />
+          {/* <Footer /> */}
+        </UserContext.Provider>
     </>
   )
 }

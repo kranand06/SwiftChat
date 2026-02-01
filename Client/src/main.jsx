@@ -1,58 +1,89 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import './index.css'
-import App from './App.jsx'
-import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import Error404 from './Components/Error404.jsx'
-import Home from './Components/Home.jsx'
-import LoginPage from './Components/Login/LoginPage.jsx'
-import ForgotPassword from './Components/Login/ForgotPassword.jsx'
-import ChatPage from './Components/ChatPage/ChatPage.jsx'
-import Signup from './Components/Login/Signup.jsx'
-import Profilepage from './Components/Login/Profilepage.jsx'
+import { StrictMode, useContext } from "react";
+import { createRoot } from "react-dom/client";
+import { createBrowserRouter, RouterProvider, Navigate } from "react-router-dom";
 
+import "./index.css";
+import App from "./App";
 
-const route = createBrowserRouter([
+import Home from "./Components/Home";
+import LoginPage from "./Components/Login/LoginPage";
+import Signup from "./Components/Login/Signup";
+import ForgotPassword from "./Components/Login/ForgotPassword";
+import ChatPage from "./Components/ChatPage/ChatPage";
+import Profilepage from "./Components/Login/Profilepage";
+import Error404 from "./Components/Error404";
+
+import { AuthContext, AuthProvider } from '../context/AuthContext.jsx'
+
+// 🔒 Simple inline guards
+const Protected = ({ children }) => {
+  const { authUser } = useContext(AuthContext);
+  return authUser ? children : <Navigate to="/login" replace />;
+};
+
+const GuestOnly = ({ children }) => {
+  const { authUser } = useContext(AuthContext);
+  return authUser ? <Navigate to="/chat" replace /> : children;
+};
+
+const router = createBrowserRouter([
   {
-    path: '/',
+    path: "/",
     element: <App />,
     children: [
-      {
-        path: '',
-        element: < Home/>,
-      },
-      {
-        path: 'chat',
-        element: < ChatPage/>,
-      },
-      {
-        path: 'login',
-        element: < LoginPage/>,
-      },
-      {
-        path: 'signup',
-        element: < Signup/>,
-      },
-      {
-        path: 'forgot-password',
-        element: < ForgotPassword/>,
-      },
-      {
-        path: 'profile',
-        element: < Profilepage/>,
-      },
-      {
-        path: '*',
-        element: <Error404 />,
-      },
-    ]
-  }
-])
+      { path: "", element: <Home /> },
 
+      {
+        path: "login",
+        element: (
+          <GuestOnly>
+            <LoginPage />
+          </GuestOnly>
+        ),
+      },
+      {
+        path: "signup",
+        element: (
+          <GuestOnly>
+            <Signup />
+          </GuestOnly>
+        ),
+      },
+      {
+        path: "forgot-password",
+        element: (
+          <GuestOnly>
+            <ForgotPassword />
+          </GuestOnly>
+        ),
+      },
 
+      {
+        path: "chat",
+        element: (
+          <Protected>
+            <ChatPage />
+          </Protected>
+        ),
+      },
+      {
+        path: "profile",
+        element: (
+          <Protected>
+            <Profilepage />
+          </Protected>
+        ),
+      },
 
-createRoot(document.getElementById('root')).render(
+      { path: "*", element: <Error404 /> },
+    ],
+  },
+]);
+
+createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <RouterProvider router={route} />
-  </StrictMode>,
-)
+    <AuthProvider>
+      <RouterProvider router={router} />
+    </AuthProvider>
+  </StrictMode>
+);
